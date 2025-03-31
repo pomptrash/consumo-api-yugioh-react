@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+}
+
+img {
+    min-width: 250px; 
+    width: 250px;
+}
+
+.deckCard{
+    min-width: 110px; 
+    width: 110px; 
+}
+.deckCard:hover {
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+#deckDiv{
+    width: fit-content;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#deckDiv:hover .deckCard:not(:hover) {
+    opacity: .5;
+}
