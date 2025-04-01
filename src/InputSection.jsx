@@ -7,20 +7,20 @@ export function InputSection({searchCard, randomCard, cardArray, deck, actualCar
     const [deckDisplay, setDeckDisplay] = useState(false)
     
     return (
-        <section className="container">
-            <label htmlFor="cardInput">Cartas YuGiOh</label>
-            <input list="datalist" value={newInput} onChange={e=>setNewInput(e.target.value)} type="text" name="cardInput" id="cardInput" />
+        <section className="container my-5 d-flex flex-column gap-2 text-light">
+            <label className="h1" htmlFor="cardInput">Cartas YuGiOh</label>
+            <input className="p-1" list="datalist" value={newInput} onChange={e=>setNewInput(e.target.value)} type="text" name="cardInput" id="cardInput" placeholder="Nome da carta" />
             <datalist id="datalist">
                 {cardArray.map((card) => (
                     <option key={card.id} value={card.name} />
                 ))}
             </datalist>
-            <div>
-                <button onClick={e=>searchCard(newInput)} id="btn btnSearch">Pesquisar</button>
-                <button onClick={e=>randomCard()} id="btn btnRandomCard">Carta Aleatória</button>
-                <button onClick={e=>{
+            <div className="btns-div d-flex gap-1">
+                <button className="btn" onClick={e=>searchCard(newInput)} id="btnSearch">Pesquisar</button>
+                <button className="btn" onClick={e=>randomCard()} id="btnRandomCard">Carta Aleatória</button>
+                <button className="btn" onClick={e=>{
                     setDeckDisplay(!deckDisplay)
-                }} id="btn btnSeeDeck">
+                }} id="btnSeeDeck">
                     {deckDisplay? 'Ocultar Deck': 'Ver Deck'}
                 </button>
             </div>

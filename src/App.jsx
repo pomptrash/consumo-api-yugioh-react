@@ -16,7 +16,7 @@ function App() {
     }
   }); // Array para armazenar as cartas guardadas no deck
 
-
+  // FUNÇÃO PARA GAURDAR O DECK NO LOCAL STORAGE
   useEffect(()=>{
     localStorage.setItem('Deck', JSON.stringify(deck))
   }, [deck])
@@ -48,10 +48,13 @@ function App() {
     return setActualCard(cardArray[randomizer]);
   }
 
+  // FUNÇÃO PARA ADICIONAR CARTA AO DECK
   function addToDeck(actualCard) {
     if(actualCard?.id) return setNewDeck((currentDeck) =>[...currentDeck, actualCard]);
+    alert('Selecione uma carta')
   }
 
+  // FUNÇÃO PARA REMOVER CARTA DO DECK
   function removeFromDeck(card){
     return setNewDeck((currentDeck) =>{
       const temporaryDeck = [...currentDeck]
