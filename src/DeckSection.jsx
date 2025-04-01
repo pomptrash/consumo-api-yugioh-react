@@ -6,12 +6,11 @@ export function DeckSection({deck, actualCard, setActualCard, removeFromDeck}){
             <h5>DEF Total: <span id="totalAmount">{deck?.reduce((total, card)=> total+card.def || 0, 0)}</span></h5>
             <div className="container" id="deckDiv">
                 {deck?.map(card=>(
-                    <>
-                        <div id="cardDiv">
-                            <img onClick={e=>{setActualCard(card)}}  key={card?.id+Math.random()} src={card?.card_images?.[0]?.image_url} className="miniCard" alt="carta yugioh"/>
-                            <i  onClick={e=>{removeFromDeck(card)}} className="bi bi-trash3"></i>
-                        </div>
-                    </>
+                    <div id="cardDiv" key={card?.key}>
+                        <img onClick={e=>{setActualCard(card)}} src={card?.card_images?.[0]?.image_url} className="miniCard" alt="carta yugioh"/>
+                        <i  onClick={e=>{removeFromDeck(card)}} className="bi bi-trash3"></i>
+                    </div>
+
                 ))}
             </div>
         </section>

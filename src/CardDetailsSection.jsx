@@ -9,6 +9,7 @@ export function CardDetailsSection({actualCard, addToDeck, deck}){
             <div className="cardImgDiv d-flex flex-column gap-2">
                 <img src={src? src: cardBackwards} id="actualCard" alt="yugioh actualCard" />
                 <button className="btn" onClick={e=>{
+                    if (actualCard) actualCard.key = crypto.randomUUID();
                     addToDeck(actualCard)
                 }} id="btnAddCard">Adicionar ao Deck</button>
             </div>

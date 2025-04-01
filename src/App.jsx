@@ -5,21 +5,21 @@ import { CardDetailsSection } from "./CardDetailsSection";
 function App() {
   const [cardArray, setNewCardArray] = useState([]); // Array para receber todas as cartas da requisição
   const [actualCard, setActualCard] = useState({}); // Objeto para capturar a carta atual e passar como prop para CardDetails
-  const [deck, setNewDeck] = useState(()=>{
+  const [deck, setNewDeck] = useState(() => {
     try {
-      const localDeck = localStorage.getItem('Deck')
-      if(localDeck == null) return []
-      return JSON.parse(localDeck)
+      const localDeck = localStorage.getItem("Deck");
+      if (localDeck == null) return [];
+      return JSON.parse(localDeck);
     } catch (error) {
-      console.error('erro ao recuperar localstorage:' + error)
-      return []
+      console.error("erro ao recuperar localstorage:" + error);
+      return [];
     }
   }); // Array para armazenar as cartas guardadas no deck
 
   // FUNÇÃO PARA GAURDAR O DECK NO LOCAL STORAGE
-  useEffect(()=>{
-    localStorage.setItem('Deck', JSON.stringify(deck))
-  }, [deck])
+  useEffect(() => {
+    localStorage.setItem("Deck", JSON.stringify(deck));
+  }, [deck]);
 
   // COONSUMO DA API
   async function fetchData() {
@@ -37,7 +37,9 @@ function App() {
   // FUNÇÃO PARA VALIDAR A CARTA PESQUISADA NO INPUT
   function searchCard(inputValue) {
     const cardFiltered = cardArray.find(
-      (card) => card?.name.toLowerCase() === inputValue.toLowerCase()
+      (card) =>
+        card?.name.toLowerCase() === inputValue.toLowerCase() ||
+        card?.id == inputValue
     );
     return setActualCard(cardFiltered);
   }
@@ -50,17 +52,18 @@ function App() {
 
   // FUNÇÃO PARA ADICIONAR CARTA AO DECK
   function addToDeck(actualCard) {
-    if(actualCard?.id) return setNewDeck((currentDeck) =>[...currentDeck, actualCard]);
-    alert('Selecione uma carta')
+    if (actualCard?.id)
+      return setNewDeck((currentDeck) => [...currentDeck, actualCard]);
+    alert("Selecione uma carta");
   }
 
   // FUNÇÃO PARA REMOVER CARTA DO DECK
-  function removeFromDeck(card){
-    return setNewDeck((currentDeck) =>{
-      const temporaryDeck = [...currentDeck]
-      temporaryDeck.splice(temporaryDeck.indexOf(card), 1)
-      return temporaryDeck
-    })
+  function removeFromDeck(card) {
+    return setNewDeck((currentDeck) => {
+      const refreshedDeck = [...currentDeck];
+      refreshedDeck.splice(refreshedDeck.indexOf(card), 1);
+      return refreshedDeck;
+    });
   }
 
   return (

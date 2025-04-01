@@ -25,6 +25,15 @@ body {
   text-shadow: -2px 2px 2px black;
 }
 
+.inputDiv{
+  position: relative;
+}
+
+#clearInputIcon {
+  text-shadow: none;
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   background-color: white;
   width: 9px;
