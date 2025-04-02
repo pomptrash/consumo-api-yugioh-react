@@ -9,9 +9,10 @@ export function CardDetailsSection({actualCard, addToDeck, deck}){
             <div className="cardImgDiv d-flex flex-column gap-2">
                 <img src={src? src: cardBackwards} id="actualCard" alt="yugioh actualCard" />
                 <button className="btn" onClick={e=>{
-                    if (actualCard) actualCard.key = crypto.randomUUID();
-                    addToDeck(actualCard)
-                }} id="btnAddCard">Adicionar ao Deck</button>
+                    if (deck.length >= 15){ return alert('Deck cheio. Máximo de 15 cartas')}
+                    // criando cópia da carta para gerar key único no objeto
+                    const copyActualCard = {...actualCard, key: crypto.randomUUID()} 
+                    addToDeck(copyActualCard)}} id="btnAddCard">Adicionar ao Deck</button>
             </div>
 
             <div className="cardDetailsDiv flex-grow-1">

@@ -8,7 +8,7 @@ export function DeckSection({deck, actualCard, setActualCard, removeFromDeck}){
                 {deck?.map(card=>(
                     <div id="cardDiv" key={card?.key}>
                         <img onClick={e=>{setActualCard(card)}} src={card?.card_images?.[0]?.image_url} className="miniCard" alt="carta yugioh"/>
-                        <i  onClick={e=>{removeFromDeck(card)}} className="bi bi-trash3"></i>
+                        <i  onClick={e=>{removeFromDeck(card); alert(`Carta '${card.name}' removida.`)}} className="bi bi-trash3"></i>
                     </div>
 
                 ))}

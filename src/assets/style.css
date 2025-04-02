@@ -48,8 +48,8 @@ body {
 }
 
 .miniCard {
-  min-width: 110px;
-  width: 110px;
+  min-width: 100px;
+  width: 100px;
 }
 
 #deckDiv {
