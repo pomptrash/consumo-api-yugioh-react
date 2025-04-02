@@ -55,6 +55,7 @@ body {
 #deckDiv {
   display: flex;
   flex-wrap: wrap;
+  gap: 3px;
 }
 
 #cardDiv {
