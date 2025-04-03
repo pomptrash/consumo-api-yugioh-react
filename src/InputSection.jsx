@@ -2,10 +2,10 @@ import { useState } from "react"
 import { DeckSection } from "./DeckSection"
 
 // FUNÇÕES PARA PESQUISAR E GERAR CARTA ALEATÓRIA RECEBIDAS COMO PROPS
-export function InputSection({searchCard, randomCard, cardArray, deck, actualCard, setActualCard, removeFromDeck}){
+export function InputSection({searchCard, randomCard, cardArray, deck, actualCard, setActualCard, removeFromDeck, showMessageBox }){
     const [newInput, setNewInput] = useState('')
     const [deckDisplay, setDeckDisplay] = useState(false)
-    
+
     return (
         <section className="container my-5 d-flex flex-column gap-2 text-light">
             <label className="h1" htmlFor="cardInput">Cartas YuGiOh {cardArray.length <= 0 && <h6>carregando as cartas...</h6>}</label>
@@ -27,7 +27,7 @@ export function InputSection({searchCard, randomCard, cardArray, deck, actualCar
                     {deckDisplay? 'Ocultar Deck': `Ver Deck (${deck.length})`} 
                 </button>
             </div>
-            {deckDisplay && <DeckSection deck={deck} actualCard={actualCard} setActualCard={setActualCard} removeFromDeck={removeFromDeck}/>}
+            {deckDisplay && <DeckSection deck={deck} actualCard={actualCard} setActualCard={setActualCard} removeFromDeck={removeFromDeck} showMessageBox={showMessageBox}/>}
         </section>
     )
 }

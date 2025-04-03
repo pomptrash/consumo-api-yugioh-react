@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { InputSection } from "./InputSection";
 import { CardDetailsSection } from "./CardDetailsSection";
+import { MessageBox } from "./MessageBox";
 
 function App() {
   const [cardArray, setNewCardArray] = useState([]); // Array para receber todas as cartas da requisição
   const [actualCard, setActualCard] = useState({}); // Objeto para capturar a carta atual e passar como prop para CardDetails
+  const [messageBoxDisplay, setMessageBoxDisplay] = useState(false); // hook para mostrar/ocultar o messageBox
+  const [message, setMessage] = useState(''); // hook para definir a mensagem mostrada na messageBox
+  const [typeMessage, setTypeMessage] = useState(0); // definir o tipo de messageBox: 0 ou 1
+  const [onConfirm, setConfirm] = useState(false); // se o botão de confirmar do messageBox foi clicado.
+  
   const [deck, setNewDeck] = useState(() => {
     try {
       const localDeck = localStorage.getItem("Deck");
@@ -54,7 +60,7 @@ function App() {
   function addToDeck(actualCard) {
     if (actualCard?.id)
       return setNewDeck((currentDeck) => [...currentDeck, actualCard]);
-    alert("Selecione uma carta");
+    showMessageBox('Selecione uma carta', 1);
   }
 
   // FUNÇÃO PARA REMOVER CARTA DO DECK
@@ -66,8 +72,24 @@ function App() {
     });
   }
 
+  // FUNÇÃO PARA MOSTRAR o MESSAGEBOX
+  function showMessageBox(message='Aviso', type=0){
+    setMessage(message)
+    setTypeMessage(type)
+    return setMessageBoxDisplay(!messageBoxDisplay)
+  }
+  
   return (
     <>
+      {messageBoxDisplay && (
+        <MessageBox
+          showMessageBox={showMessageBox}
+          message={message}
+          typeMessage={typeMessage}
+          onConfirm={onConfirm}
+          setConfirm={setConfirm}
+        />
+      )}
       <InputSection
         searchCard={searchCard}
         randomCard={randomCard}
@@ -76,11 +98,15 @@ function App() {
         actualCard={actualCard}
         setActualCard={setActualCard}
         removeFromDeck={removeFromDeck}
+        showMessageBox={showMessageBox}
       />
       <CardDetailsSection
         actualCard={actualCard}
         addToDeck={addToDeck}
         deck={deck}
+        showMessageBox={showMessageBox}
+        onConfirm={onConfirm}
+        setConfirm={setConfirm}
       />
     </>
   );
